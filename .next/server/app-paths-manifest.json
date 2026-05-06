@@ -1,0 +1,13 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/customers/page": "app/customers/page.js",
+  "/products/page": "app/products/page.js",
+  "/categories/page": "app/categories/page.js",
+  "/pos/page": "app/pos/page.js",
+  "/page": "app/page.js",
+  "/suppliers/page": "app/suppliers/page.js",
+  "/settings/page": "app/settings/page.js",
+  "/vehicle-parts/page": "app/vehicle-parts/page.js",
+  "/purchases/page": "app/purchases/page.js",
+  "/reports/page": "app/reports/page.js"
+}

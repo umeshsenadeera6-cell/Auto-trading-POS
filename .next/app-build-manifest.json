@@ -1,0 +1,122 @@
+{
+  "pages": {
+    "/_not-found/page": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/chunks/app/_not-found/page-8c954f45af9cda96.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/css/d61171027845687e.css",
+      "static/chunks/app/layout-8f7c9fa40070938c.js"
+    ],
+    "/customers/page": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/chunks/297-3e5b577acea2fb5a.js",
+      "static/chunks/849-be110d75dd0dcae2.js",
+      "static/chunks/534-f833994ebbdfbfff.js",
+      "static/chunks/app/customers/page-ce25114752d0755a.js"
+    ],
+    "/products/page": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/chunks/297-3e5b577acea2fb5a.js",
+      "static/chunks/849-be110d75dd0dcae2.js",
+      "static/chunks/534-f833994ebbdfbfff.js",
+      "static/chunks/app/products/page-21d4cdc50d62e782.js"
+    ],
+    "/categories/page": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/chunks/297-3e5b577acea2fb5a.js",
+      "static/chunks/849-be110d75dd0dcae2.js",
+      "static/chunks/534-f833994ebbdfbfff.js",
+      "static/chunks/app/categories/page-dcdd127936886c09.js"
+    ],
+    "/pos/page": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/chunks/297-3e5b577acea2fb5a.js",
+      "static/chunks/849-be110d75dd0dcae2.js",
+      "static/chunks/534-f833994ebbdfbfff.js",
+      "static/chunks/app/pos/page-2e117fa992bab553.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/chunks/297-3e5b577acea2fb5a.js",
+      "static/chunks/597-36ee04cd14548652.js",
+      "static/chunks/762-92ab593cd5509a6a.js",
+      "static/chunks/849-be110d75dd0dcae2.js",
+      "static/chunks/534-f833994ebbdfbfff.js",
+      "static/chunks/app/page-8dc198ec78e7da60.js"
+    ],
+    "/suppliers/page": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/chunks/297-3e5b577acea2fb5a.js",
+      "static/chunks/849-be110d75dd0dcae2.js",
+      "static/chunks/534-f833994ebbdfbfff.js",
+      "static/chunks/app/suppliers/page-8f05e33574c5f6df.js"
+    ],
+    "/settings/page": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/chunks/297-3e5b577acea2fb5a.js",
+      "static/chunks/849-be110d75dd0dcae2.js",
+      "static/chunks/app/settings/page-6a17070d24e4d0ba.js"
+    ],
+    "/vehicle-parts/page": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/chunks/297-3e5b577acea2fb5a.js",
+      "static/chunks/849-be110d75dd0dcae2.js",
+      "static/chunks/534-f833994ebbdfbfff.js",
+      "static/chunks/app/vehicle-parts/page-722037f1d9503d65.js"
+    ],
+    "/purchases/page": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/chunks/297-3e5b577acea2fb5a.js",
+      "static/chunks/849-be110d75dd0dcae2.js",
+      "static/chunks/534-f833994ebbdfbfff.js",
+      "static/chunks/app/purchases/page-d5763763833a1610.js"
+    ],
+    "/reports/page": [
+      "static/chunks/webpack-32b99883bf220ffe.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-249e483089def0f6.js",
+      "static/chunks/main-app-da577bbcc63dd227.js",
+      "static/chunks/297-3e5b577acea2fb5a.js",
+      "static/chunks/597-36ee04cd14548652.js",
+      "static/chunks/133-72400945072b7009.js",
+      "static/chunks/849-be110d75dd0dcae2.js",
+      "static/chunks/534-f833994ebbdfbfff.js",
+      "static/chunks/app/reports/page-dce3718302d9f059.js"
+    ]
+  }
+}

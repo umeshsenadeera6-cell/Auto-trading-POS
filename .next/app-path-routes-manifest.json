@@ -1,0 +1,13 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/customers/page": "/customers",
+  "/products/page": "/products",
+  "/categories/page": "/categories",
+  "/pos/page": "/pos",
+  "/page": "/",
+  "/suppliers/page": "/suppliers",
+  "/settings/page": "/settings",
+  "/vehicle-parts/page": "/vehicle-parts",
+  "/purchases/page": "/purchases",
+  "/reports/page": "/reports"
+}

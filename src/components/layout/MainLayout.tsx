@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
@@ -14,6 +15,18 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children, pageTitle, pageSubtitle }: MainLayoutProps) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+    const user = localStorage.getItem("user");
+    if (!user) {
+      router.push("/login");
+    }
+  }, [router]);
+
+  if (!isMounted) return null;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -40,3 +53,4 @@ export default function MainLayout({ children, pageTitle, pageSubtitle }: MainLa
     </div>
   );
 }
+

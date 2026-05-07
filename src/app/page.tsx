@@ -31,6 +31,7 @@ import MainLayout from "@/components/layout/MainLayout";
 import { dashboardStats, salesChartData, topProducts, recentSales, products } from "@/lib/mockData";
 import { formatCurrency, formatDateTime } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -130,8 +131,20 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export default function Dashboard() {
+  const [user, setUser] = useState<{ name: string; role: string } | null>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const greeting = user ? `Welcome back, ${user.role === 'admin' ? 'Admin' : user.name}` : "Welcome back";
+
   return (
-    <MainLayout pageTitle="Dashboard" pageSubtitle="Welcome back, Admin — Here's what's happening today">
+    <MainLayout pageTitle="Dashboard" pageSubtitle={`${greeting} — Here's what's happening today`}>
+
       <motion.div
         variants={containerVariants}
         initial="hidden"

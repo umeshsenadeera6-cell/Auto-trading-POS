@@ -15,9 +15,14 @@ import {
   AlertCircle,
   Info,
   X,
+  LogOut,
+  User,
+  Settings as SettingsIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatDateTime } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface NavbarProps {
   sidebarCollapsed: boolean;
@@ -53,9 +58,24 @@ const notifications = [
 ];
 
 export default function Navbar({ sidebarCollapsed, pageTitle, pageSubtitle }: NavbarProps) {
+  const router = useRouter();
   const [darkMode, setDarkMode] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [user, setUser] = useState<{ name: string; role: string; email: string } | null>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    router.push("/login");
+  };
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
@@ -195,14 +215,65 @@ export default function Navbar({ sidebarCollapsed, pageTitle, pageSubtitle }: Na
         <div className="w-px h-6 bg-gray-200" />
 
         {/* User */}
-        <button className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-gray-100 transition-all duration-200">
-          <div className="w-7 h-7 rounded-full bg-green-gradient flex items-center justify-center text-white text-xs font-bold">
-            A
-          </div>
-          <span className="text-sm font-medium text-gray-700 hidden lg:block">Admin</span>
-          <ChevronDown className="w-3.5 h-3.5 text-gray-400 hidden lg:block" />
-        </button>
+        <div className="relative">
+          <button 
+            onClick={() => setShowUserMenu(!showUserMenu)}
+            className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-gray-100 transition-all duration-200"
+          >
+            <div className="w-7 h-7 rounded-full bg-green-gradient flex items-center justify-center text-white text-xs font-bold shadow-sm">
+              {user?.name?.charAt(0) || "U"}
+            </div>
+            <div className="text-left hidden lg:block">
+              <p className="text-sm font-bold text-gray-900 leading-none mb-0.5">{user?.name || "User"}</p>
+              <p className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">{user?.role || "Guest"}</p>
+            </div>
+            <ChevronDown className={cn("w-3.5 h-3.5 text-gray-400 hidden lg:block transition-transform duration-200", showUserMenu && "rotate-180")} />
+          </button>
+
+          <AnimatePresence>
+            {showUserMenu && (
+              <>
+                <div 
+                  className="fixed inset-0 z-40" 
+                  onClick={() => setShowUserMenu(false)}
+                />
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 p-1.5"
+                >
+                  <div className="px-3 py-2.5 mb-1 border-b border-gray-50">
+                    <p className="text-xs text-gray-400 font-medium mb-0.5">Signed in as</p>
+                    <p className="text-sm font-bold text-gray-900 truncate">{user?.email || "user@example.com"}</p>
+                  </div>
+                  
+                  <button className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <User className="w-4 h-4" />
+                    My Profile
+                  </button>
+                  <button className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <SettingsIcon className="w-4 h-4" />
+                    Account Settings
+                  </button>
+                  
+                  <div className="h-px bg-gray-50 my-1.5 mx-2" />
+                  
+                  <button 
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-red-600 hover:bg-red-50 transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Logout Account
+                  </button>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </header>
   );
 }
+

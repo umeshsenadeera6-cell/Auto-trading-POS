@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import { cn } from "@/lib/utils";
+import { hasPermission } from "@/lib/permissions";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -29,8 +30,17 @@ export default function MainLayout({ children, pageTitle, pageSubtitle }: MainLa
     const user = JSON.parse(storedUser);
     const pathname = window.location.pathname;
 
-    if (user.role === "cashier" && pathname !== "/pos") {
-      router.push("/pos");
+    if (!hasPermission(user.role, pathname)) {
+      // If no permission for current page, redirect to POS or Dashboard if they have access
+      if (hasPermission(user.role, "/pos")) {
+        router.push("/pos");
+      } else if (hasPermission(user.role, "/")) {
+        router.push("/");
+      } else {
+        // Absolute fallback if everything is restricted (shouldn't happen with defaults)
+        localStorage.removeItem("user");
+        router.push("/login");
+      }
     }
   }, [router]);
 

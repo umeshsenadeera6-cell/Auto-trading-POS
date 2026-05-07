@@ -16,9 +16,21 @@ import {
   ChevronRight,
   User,
   Check,
+  MoreVertical,
+  FileText,
+  Lock,
+  Eye,
+  Trash2,
 } from "lucide-react";
 import MainLayout from "@/components/layout/MainLayout";
 import { cn } from "@/lib/utils";
+import { 
+  APP_PERMISSIONS, 
+  Permission, 
+  getCashierPermissions, 
+  setCashierPermissions 
+} from "@/lib/permissions";
+import { useEffect } from "react";
 
 const settingSections = [
   { id: "general", label: "General Settings", icon: Store },
@@ -31,6 +43,28 @@ const settingSections = [
 
 export default function SettingsPage() {
   const [activeSection, setActiveSection] = useState("general");
+  const [cashierPermissions, setCashierPermissionsState] = useState<Permission[]>([]);
+
+  useEffect(() => {
+    setCashierPermissionsState(getCashierPermissions());
+  }, []);
+
+  const handleTogglePermission = (permissionId: Permission) => {
+    setCashierPermissionsState(prev => 
+      prev.includes(permissionId)
+        ? prev.filter(p => p !== permissionId)
+        : [...prev, permissionId]
+    );
+  };
+
+  const handleSave = () => {
+    if (activeSection === "users") {
+      setCashierPermissions(cashierPermissions);
+      alert("Permissions updated successfully!");
+    } else {
+      alert("Settings saved successfully!");
+    }
+  };
 
   return (
     <MainLayout pageTitle="Settings" pageSubtitle="Configure your store preferences and system parameters">
@@ -64,7 +98,7 @@ export default function SettingsPage() {
               </h3>
               <p className="text-sm text-gray-500">Manage your store's {activeSection} configurations</p>
             </div>
-            <button className="btn-primary">
+            <button className="btn-primary" onClick={handleSave}>
               <Save className="w-4 h-4" />
               Save Changes
             </button>
@@ -241,6 +275,50 @@ export default function SettingsPage() {
                       </div>
                     </div>
                   ))}
+                </div>
+
+                <div className="pt-8 border-t border-gray-100 mt-8">
+                  <div className="flex items-center gap-2 mb-6">
+                    <div className="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center text-green-600">
+                      <Lock className="w-4 h-4" />
+                    </div>
+                    <h4 className="font-black text-gray-900">Role Permissions (Cashier)</h4>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {APP_PERMISSIONS.map((perm) => (
+                      <div 
+                        key={perm.id} 
+                        onClick={() => handleTogglePermission(perm.id)}
+                        className={cn(
+                          "flex items-center justify-between p-4 rounded-2xl border transition-all duration-200 cursor-pointer group",
+                          cashierPermissions.includes(perm.id)
+                            ? "bg-green-50/50 border-green-200 ring-1 ring-green-200"
+                            : "bg-white border-gray-100 hover:border-gray-200"
+                        )}
+                      >
+                        <div className="flex-1">
+                          <p className={cn(
+                            "text-sm font-bold transition-colors",
+                            cashierPermissions.includes(perm.id) ? "text-green-700" : "text-gray-700"
+                          )}>
+                            {perm.label}
+                          </p>
+                          <p className="text-[10px] text-gray-400 mt-0.5">{perm.description}</p>
+                        </div>
+                        <div className={cn(
+                          "w-10 h-5 rounded-full relative transition-colors p-1",
+                          cashierPermissions.includes(perm.id) ? "bg-green-500" : "bg-gray-200"
+                        )}>
+                          <motion.div 
+                            animate={{ x: cashierPermissions.includes(perm.id) ? 20 : 0 }}
+                            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                            className="w-3 h-3 bg-white rounded-full shadow-sm"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}

@@ -23,6 +23,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { hasPermission } from "@/lib/permissions";
 
 const navItems = [
   {
@@ -82,12 +83,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
 
   const filteredNavItems = navItems.map(group => ({
     ...group,
-    items: group.items.filter(item => {
-      if (user?.role === "cashier") {
-        return item.href === "/pos";
-      }
-      return true;
-    })
+    items: group.items.filter(item => hasPermission(user?.role || "", item.href))
   })).filter(group => group.items.length > 0);
 
   return (

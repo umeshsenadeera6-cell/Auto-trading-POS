@@ -20,9 +20,17 @@ export default function MainLayout({ children, pageTitle, pageSubtitle }: MainLa
 
   useEffect(() => {
     setIsMounted(true);
-    const user = localStorage.getItem("user");
-    if (!user) {
+    const storedUser = localStorage.getItem("user");
+    if (!storedUser) {
       router.push("/login");
+      return;
+    }
+
+    const user = JSON.parse(storedUser);
+    const pathname = window.location.pathname;
+
+    if (user.role === "cashier" && pathname !== "/pos") {
+      router.push("/pos");
     }
   }, [router]);
 

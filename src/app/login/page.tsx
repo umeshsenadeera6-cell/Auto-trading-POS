@@ -41,7 +41,11 @@ export default function LoginPage() {
           role,
           name: role === "admin" ? "System Admin" : "Store Cashier",
         }));
-        router.push("/");
+        if (role === "cashier") {
+          router.push("/pos");
+        } else {
+          router.push("/");
+        }
       } else {
         setError("Please enter both email and password");
         setIsLoading(false);

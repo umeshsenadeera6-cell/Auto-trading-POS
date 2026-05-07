@@ -69,6 +69,26 @@ interface SidebarProps {
 
 export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const pathname = usePathname();
+  const [user, setUser] = useState<{ name: string; role: string; email: string } | null>(null);
+
+  useState(() => {
+    if (typeof window !== "undefined") {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    }
+  });
+
+  const filteredNavItems = navItems.map(group => ({
+    ...group,
+    items: group.items.filter(item => {
+      if (user?.role === "cashier") {
+        return item.href === "/pos";
+      }
+      return true;
+    })
+  })).filter(group => group.items.length > 0);
 
   return (
     <motion.aside
@@ -113,7 +133,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto custom-scroll py-4 px-2">
-        {navItems.map((group) => (
+        {filteredNavItems.map((group) => (
           <div key={group.group} className="mb-4">
             <AnimatePresence>
               {!collapsed && (
@@ -236,9 +256,13 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
             "flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 cursor-pointer transition-all duration-200 mt-2",
             collapsed && "justify-center px-0"
           )}
+          onClick={() => {
+            localStorage.removeItem("user");
+            window.location.href = "/login";
+          }}
         >
-          <div className="w-8 h-8 rounded-full bg-green-gradient flex items-center justify-center flex-shrink-0 text-white text-xs font-bold">
-            A
+          <div className="w-8 h-8 rounded-full bg-green-gradient flex items-center justify-center flex-shrink-0 text-white text-xs font-bold uppercase">
+            {user?.name?.[0] || "U"}
           </div>
           <AnimatePresence>
             {!collapsed && (
@@ -248,8 +272,8 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 exit={{ opacity: 0 }}
                 className="min-w-0 flex-1"
               >
-                <p className="text-white text-sm font-medium truncate">Admin User</p>
-                <p className="text-gray-500 text-xs truncate">admin@autoparts.lk</p>
+                <p className="text-white text-sm font-medium truncate">{user?.name || "User"}</p>
+                <p className="text-gray-500 text-xs truncate capitalize">{user?.role || "Role"}</p>
               </motion.div>
             )}
           </AnimatePresence>
